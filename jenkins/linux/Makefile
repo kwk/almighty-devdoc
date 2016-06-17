@@ -1,4 +1,4 @@
-SOURCE_DIR := $(shell pwd)/..
+SOURCE_DIR := $(shell pwd)/../..
 BUILD_DIR := $(shell mktemp -d)
 DOCKER_IMAGE_DEVDOC := almighty-devdoc
 
@@ -27,6 +27,6 @@ build: build-dir docker-image-devdoc
 		-v $(SOURCE_DIR):/source-dir:ro \
 		-v $(BUILD_DIR):/build-dir:rw \
 		$(DOCKER_IMAGE_DEVDOC) \
-		/source-dir/jenkins/build.sh /source-dir /build-dir
+		/source-dir/jenkins/linux/build.sh /source-dir /build-dir
 
 

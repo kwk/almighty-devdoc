@@ -2,6 +2,8 @@ FROM fedora:23
 MAINTAINER "Konrad Kleine <kkleine@redhat.com>"
 ENV LANG=en_US.utf8
 
+# Some packages might seem weird but they are required by the
+# RVM installer
 RUN dnf install -y \
       python3-blockdiag \
       python3-blockdiag-devel \
@@ -11,6 +13,7 @@ RUN dnf install -y \
       tar \
       procps-ng \
       findutils \
+      git \
     && dnf clean all
 
 #----------------------------------------------------------
