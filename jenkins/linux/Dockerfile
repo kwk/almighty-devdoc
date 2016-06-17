@@ -5,15 +5,14 @@ ENV LANG=en_US.utf8
 # Some packages might seem weird but they are required by the
 # RVM installer
 RUN dnf install -y \
-      python3-blockdiag \
-      python3-blockdiag-devel \
-      graphviz \
       curl \
-      which \
-      tar \
-      procps-ng \
       findutils \
-      git \
+      graphviz \
+      java-1.8.0-openjdk-headless \
+      procps-ng \
+      python-blockdiag \
+      tar \
+      which \
     && dnf clean all
 
 #----------------------------------------------------------
@@ -22,7 +21,8 @@ RUN dnf install -y \
 # copied as gpg needs to be gpg2 for instance.
 #----------------------------------------------------------
 
-RUN gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+#RUN gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+RUN curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
 
 # Download the installer
 RUN curl -O https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer
