@@ -38,16 +38,13 @@ set -x
 # Restore bash trap
 trap clean_up EXIT SIGHUP SIGINT SIGTERM SIGKILL
 
-# Enter bash for debugging
-# TODO (kkleine) remove bash when running in Jenkins
-adduser nonroot
-usermod -a -G rvm nonroot
-
-# Copy source code to build dir so we can override anything without
-# messing with the source code outside of the container
-su nonroot --command="cp -rfv ${source_dir}/* ${build_dir}"
+cd ${source_dir}
+cp -Rfvp . ${build_dir}
 
 # Install all ruby gems as specified in the Gemfile
-su nonroot --command="cd ${build_dir} && bundle install --path ~/.gem"
+cd ${build_dir}
+bundle install
 
-# bundle rake deploy
+# Deploy
+bundle exec rake deploy
+
